@@ -1,0 +1,33 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:latest
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_USER: ${USER_NAME}
+      POSTGRES_PASSWORD: ${PASSWORD}
+    ports:
+      - '5432:5432'
+    networks:
+      - mynetwork
+
+  dbt:
+    image: ghcr.io/dbt-labs/dbt-postgres:latest  # Atualização do repositório da imagem
+    volumes:
+      - ./dbt:/usr/app/dbt
+    environment:
+      DBT_PROFILES_DIR: /usr/app/dbt
+    depends_on:
+      - postgres
+    networks:
+      - mynetwork
+    command: tail -f /dev/null
+
+networks:
+  mynetwork:
+
+volumes:
+  postgres_data:
