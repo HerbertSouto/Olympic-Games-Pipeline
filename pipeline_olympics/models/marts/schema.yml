@@ -1,0 +1,29 @@
+version: 2
+
+models:
+  - name: medals
+    description: "Tabela de medalhas com UUID como chave primária"
+    columns:
+      - name: id
+        description: "UUID como chave primária"
+        tests:
+          - unique
+          - not_null
+      - name: medal_type
+        description: "Tipo da medalha"
+      - name: medal_date
+        description: "Data da medalha"
+      - name: name
+        description: "Nome do atleta"
+      - name: country_code
+        description: "Código do país"
+      - name: gender
+        description: "Gênero"
+      - name: discipline
+        description: "Disciplina"
+      - name: code
+        description: "Código do atleta (FK)"
+        tests:
+          - relationships:
+              to: ref('athletes')
+              field: code
