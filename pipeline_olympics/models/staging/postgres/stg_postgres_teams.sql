@@ -11,15 +11,15 @@ WITH casted_teams AS (
         events AS events,                          
         athletes AS athletes,                      
         athletes_codes AS athletes_codes,          
-        CAST(num_athletes AS integer) AS num_athletes, 
+        FLOOR(CAST(num_athletes AS FLOAT))::INTEGER AS num_athletes, 
         coaches AS coaches,                        
         coaches_codes AS coaches_codes,            
-        CAST(num_coaches AS integer) AS num_coaches  
+        FLOOR(CAST(num_coaches AS FLOAT))::INTEGER AS num_coaches  
     FROM {{ ref('raw_postgres_teams') }}
 )
 
 SELECT * FROM casted_teams
 
 {{ config(
-    schema='bronze'
+    schema='staging'
 ) }}

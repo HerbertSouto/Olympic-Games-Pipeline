@@ -1,5 +1,5 @@
-SELECT * FROM bronze.sheets_teams
+SELECT * FROM raw.sheets_teams
 
 {{ config(
-    schema='bronze'
+    schema='raw'
 ) }}
