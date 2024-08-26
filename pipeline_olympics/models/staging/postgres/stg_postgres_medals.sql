@@ -1,6 +1,8 @@
 with casted_medals as (
 
     select
+
+        cast(id as int) as id,
         cast(medal_type as varchar) as medal_type,
         cast(medal_code as int) as medal_code,
         to_date(medal_date, 'DD/MM/YYYY') as medal_date,
