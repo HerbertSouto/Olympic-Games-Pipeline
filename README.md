@@ -40,8 +40,7 @@ Este projeto cria um pipeline de dados para os Jogos Olímpicos de 2024. Utiliza
 - Configuração do Airbyte para extrair dados das planilhas do Google Sheets relacionadas às Olimpíadas 2024.
 - Configuração do banco de dados PostgreSQL no Render.
 - Desenvolvimento inicial dos modelos dbt para transformação dos dados.
-
+- Configuração das camadas de staging, intermediate e mart no dbt.
 ### Próximos Passos:
-- Finalizar a configuração das camadas de staging e mart no dbt.
 - Configurar o Apache Airflow para orquestrar o pipeline.
 - Desenvolver dashboards e relatórios no Power BI para visualização dos dados das Olimpíadas 2024.
