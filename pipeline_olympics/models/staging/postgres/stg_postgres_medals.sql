@@ -1,13 +1,13 @@
 with casted_medals as (
 
     select
-
-        cast(id as int) as id,
+    
         cast(medal_type as varchar) as medal_type,
         cast(medal_code as int) as medal_code,
         to_date(medal_date, 'DD/MM/YYYY') as medal_date,
         cast(name as varchar) as name,
         cast(country_code as varchar) as country_code,
+        cast(country as varchar) as country,
         cast(gender as varchar) as gender,
         cast(discipline as varchar) as discipline,
         cast(event as varchar) as event,

@@ -4,6 +4,7 @@ WITH separated_columns_medals AS (
         medal_date,
         name,
         country_code,
+        country,
         gender,
         discipline,
         code
