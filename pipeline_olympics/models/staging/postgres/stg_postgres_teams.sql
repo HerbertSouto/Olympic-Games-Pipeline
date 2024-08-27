@@ -1,5 +1,12 @@
-WITH casted_teams AS (
-    SELECT
+{{ config(
+    schema='staging'
+) }}
+
+WITH source_teams as (
+SELECT * FROM {{source('mydatabase_r7dp', 'sheets_teams')}}
+)
+
+SELECT
         code AS code,                        
         team AS team,                              
         team_gender AS team_gender,                
@@ -14,12 +21,6 @@ WITH casted_teams AS (
         FLOOR(CAST(num_athletes AS FLOAT))::INTEGER AS num_athletes, 
         coaches AS coaches,                        
         coaches_codes AS coaches_codes,            
-        FLOOR(CAST(num_coaches AS FLOAT))::INTEGER AS num_coaches  
-    FROM {{ ref('raw_postgres_teams') }}
-)
-
-SELECT * FROM casted_teams
-
-{{ config(
-    schema='staging'
-) }}
+        FLOOR(CAST(num_coaches AS FLOAT))::INTEGER AS num_coaches 
+        
+FROM source_teams         

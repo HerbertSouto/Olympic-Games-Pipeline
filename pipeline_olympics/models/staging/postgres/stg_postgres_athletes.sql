@@ -1,6 +1,12 @@
-with casted_athletes as (
+{{ config(
+    schema='staging'
+) }}
 
-    select
+WITH sources as (
+SELECT * FROM {{source('mydatabase_r7dp', 'sheets_athletes')}}
+)
+
+SELECT
         cast(code as varchar) as code,
         cast(name as varchar) as name,
         cast(name_short as varchar) as name_short,
@@ -36,14 +42,5 @@ with casted_athletes as (
         cast(sporting_relatives as varchar) as sporting_relatives,
         cast(ritual as varchar) as ritual,
         cast(other_sports as varchar) as other_sports
-        
-    from {{ ref('raw_postgres_athletes') }}
 
-)
-
-select *
-from casted_athletes
-
-{{ config(
-    schema='staging'
-) }}
+FROM sources        

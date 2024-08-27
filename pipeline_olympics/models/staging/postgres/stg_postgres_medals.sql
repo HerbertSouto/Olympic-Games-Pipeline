@@ -1,7 +1,12 @@
-with casted_medals as (
+{{ config(
+    schema='staging'
+) }}
 
-    select
-    
+WITH source_medals as (
+SELECT * FROM {{source('mydatabase_r7dp', 'sheets_medals')}}
+)
+
+    SELECT
         cast(medal_type as varchar) as medal_type,
         cast(medal_code as int) as medal_code,
         to_date(medal_date, 'DD/MM/YYYY') as medal_date,
@@ -15,12 +20,4 @@ with casted_medals as (
         cast(url_event as varchar) as url_event,
         cast(code as varchar) as code -- code convertido para varchar
 
-    from {{ ref('raw_postgres_medals') }} -- Referência ao modelo correto
-)
-
-select *
-from casted_medals
-
-{{ config(
-    schema='staging'
-) }}
+    FROM source_medals  

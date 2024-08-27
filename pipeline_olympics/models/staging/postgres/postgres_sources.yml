@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: mydatabase_r7dp
+    database: mydatabase_r7dp
+    schema: raw
+    tables:
+      - name: sheets_athletes
+      - name: sheets_medals
+      - name: sheets_teams
