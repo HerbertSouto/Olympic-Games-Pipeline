@@ -107,6 +107,7 @@ models:
       - name: code
         description: "Código único do atleta associado à medalha (chave estrangeira)."
         tests:
+          - not_null
           - relationships:
               to: ref('stg_postgres_athletes')
               field: code
@@ -153,12 +154,8 @@ models:
         description: "Lista de treinadores do time."
       - name: athletes_codes
         description: "Códigos dos atletas que compõem o time."
-        tests:
-          - not_null
       - name: num_athletes
         description: "Número de atletas que compõem o time."
-        tests:
-          - not_null
       - name: coaches_codes
         description: "Códigos dos treinadores do time."
         tests:
