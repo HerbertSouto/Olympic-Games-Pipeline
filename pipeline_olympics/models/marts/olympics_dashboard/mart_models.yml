@@ -1,0 +1,74 @@
+version: 2
+
+models:
+  - name: athletes
+    description: "Tabela que contém informações detalhadas sobre os atletas, aqui já foram realizados os casts e seleciondas as colunas necessárias."
+    columns:
+      - name: code
+        description: "Código único do atleta (Primary Key)."
+      - name: name_tv
+        description: "Nome do atleta para exibição na televisão."
+      - name: gender
+        description: "Gênero do atleta."       
+      - name: country_code
+        description: "Código do país do atleta."      
+      - name: country_full
+        description: "Nome completo do país."       
+      - name: height
+        description: "Altura do atleta."
+      - name: weight
+        description: "Peso do atleta."
+      - name: disciplines
+        description: "Disciplinas esportivas em que o atleta compete."
+      - name: birth_date
+        description: "Data de nascimento do atleta."
+  - name: medals
+    description: "Tabela que contém informações sobre as medalhas conquistadas pelos atletas."
+    columns:
+      - name: id
+        description: "Código único da medalha (Primary Key)"
+      - name: medal_type
+        description: "Tipo de medalha (ouro, prata, bronze)."      
+      - name: medal_date
+        description: "Data em que a medalha foi conquistada."
+      - name: name
+        description: "Nome do atleta que conquistou a medalha."        
+      - name: gender
+        description: "Gênero do atleta que conquistou a medalha."       
+      - name: discipline
+        description: "Disciplina esportiva na qual a medalha foi conquistada."
+      - name: code
+        description: "Código único do atleta associado à medalha (chave estrangeira)."          
+      - name: country_code
+        description: "Código do país representado pelo atleta."        
+      - name: country
+        description: "Nome do país representado pelo atleta."   
+  - name: teams
+    description: "Tabela que contém informações detalhadas sobre as equipes."
+    columns:
+      - name: code
+        description: "Código único do time (Primary Key)."
+      - name: team
+        description: "Nome do time."
+      - name: team_gender
+        description: "Gênero do time ( M - masculino, W - feminino, X - Duplas O - Mais de duas pessoas.)."
+      - name: country
+        description: "Nome do país."
+      - name: country_full
+        description: "Nome completo do país."
+      - name: country_code
+        description: "Código do país."
+      - name: discipline
+        description: "Disciplina esportiva em que o time compete."
+      - name: disciplines_code
+        description: "Código da disciplina esportiva."
+      - name: events
+        description: "Eventos nos quais o time compete."
+      - name: athletes
+        description: "Lista de atletas que compõem o time."
+      - name: coaches
+        description: "Lista de treinadores do time."
+      - name: athletes_codes
+        description: "Códigos dos atletas que compõem o time."
+      - name: num_athletes
+        description: "Número de atletas que compõem o time."

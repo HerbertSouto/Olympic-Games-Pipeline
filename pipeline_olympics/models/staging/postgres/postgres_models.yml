@@ -6,7 +6,7 @@ models:
     columns:
       - name: code
         description: "Código único do atleta (Primary Key)."
-        tests:
+        data_tests:
           - unique
           - not_null
       - name: name
@@ -21,7 +21,7 @@ models:
         description: "Função ou posição do atleta."
       - name: country_code
         description: "Código do país do atleta."
-        tests:
+        data_tests:
           - not_null
       - name: country
         description: "Nome do país do atleta."
@@ -86,9 +86,11 @@ models:
     columns:
       - name: medal_type
         description: "Tipo de medalha (ouro, prata, bronze)."
+        data_tests:
+        - not_null
       - name: medal_code
         description: "Código único da medalha."
-        tests:
+        data_tests:
           - not_null
       - name: medal_date
         description: "Data em que a medalha foi conquistada."
@@ -106,7 +108,7 @@ models:
         description: "URL do evento relacionado à medalha."
       - name: code
         description: "Código único do atleta associado à medalha (chave estrangeira)."
-        tests:
+        data_tests:
           - not_null
           - relationships:
               to: ref('stg_postgres_athletes')
@@ -116,6 +118,8 @@ models:
               field: code              
       - name: country_code
         description: "Código do país representado pelo atleta."
+        data_tests:
+        - not_null
       - name: country
         description: "Nome do país representado pelo atleta."
       - name: country_long
@@ -125,7 +129,7 @@ models:
     columns:
       - name: code
         description: "Código único do time (Primary Key)."
-        tests:
+        data_tests:
           - unique
           - not_null
       - name: team
@@ -138,13 +142,13 @@ models:
         description: "Nome completo do país."
       - name: country_code
         description: "Código do país."
-        tests:
+        data_tests:
           - not_null
       - name: discipline
         description: "Disciplina esportiva em que o time compete."
       - name: disciplines_code
         description: "Código da disciplina esportiva."
-        tests:
+        data_tests:
           - not_null
       - name: events
         description: "Eventos nos quais o time compete."
@@ -158,7 +162,7 @@ models:
         description: "Número de atletas que compõem o time."
       - name: coaches_codes
         description: "Códigos dos treinadores do time."
-        tests:
+        data_tests:
           - not_null
       - name: num_coaches
         description: "Número de treinadores do time."
