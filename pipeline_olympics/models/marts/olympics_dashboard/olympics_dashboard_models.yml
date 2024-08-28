@@ -6,14 +6,23 @@ models:
     columns:
       - name: code
         description: "Código único do atleta (Primary Key)."
+        data_tests:
+        - not_null
+        - unique
       - name: name_tv
         description: "Nome do atleta para exibição na televisão."
       - name: gender
-        description: "Gênero do atleta."       
+        description: "Gênero do atleta."
+        data_tests:
+        - not_null                    
       - name: country_code
-        description: "Código do país do atleta."      
+        description: "Código do país do atleta."
+        data_tests:
+        - not_null          
       - name: country_full
-        description: "Nome completo do país."       
+        description: "Nome completo do país."
+        data_tests:
+        - not_null                    
       - name: height
         description: "Altura do atleta."
       - name: weight
@@ -27,20 +36,31 @@ models:
     columns:
       - name: id
         description: "Código único da medalha (Primary Key)"
+        data_tests:
+        - not_null
+        - unique        
       - name: medal_type
-        description: "Tipo de medalha (ouro, prata, bronze)."      
+        description: "Tipo de medalha (ouro, prata, bronze)."
+        data_tests:
+        - not_null           
       - name: medal_date
         description: "Data em que a medalha foi conquistada."
       - name: name
-        description: "Nome do atleta que conquistou a medalha."        
+        description: "Nome do atleta que conquistou a medalha."
+        data_tests:
+        - not_null              
       - name: gender
         description: "Gênero do atleta que conquistou a medalha."       
       - name: discipline
         description: "Disciplina esportiva na qual a medalha foi conquistada."
       - name: code
-        description: "Código único do atleta associado à medalha (chave estrangeira)."          
+        description: "Código único do atleta associado à medalha (chave estrangeira)."
+        data_tests:
+        - not_null                 
       - name: country_code
-        description: "Código do país representado pelo atleta."        
+        description: "Código do país representado pelo atleta."
+        data_tests:
+        - not_null            
       - name: country
         description: "Nome do país representado pelo atleta."   
   - name: teams
@@ -48,6 +68,9 @@ models:
     columns:
       - name: code
         description: "Código único do time (Primary Key)."
+        data_tests:
+        - not_null
+        - unique        
       - name: team
         description: "Nome do time."
       - name: team_gender
@@ -58,6 +81,8 @@ models:
         description: "Nome completo do país."
       - name: country_code
         description: "Código do país."
+        data_tests:
+        - not_null       
       - name: discipline
         description: "Disciplina esportiva em que o time compete."
       - name: disciplines_code
