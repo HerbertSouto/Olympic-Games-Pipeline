@@ -66,4 +66,5 @@ flowchart TD
 
 ```
 **Visualização de Dados**: DataViz em Construção
+**Importante**: Necessário arquivo profiles.yml dentro do projeto com as configurações do database.
 
