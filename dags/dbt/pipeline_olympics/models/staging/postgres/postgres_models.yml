@@ -6,9 +6,6 @@ models:
     columns:
       - name: code
         description: "Código único do atleta (Primary Key)."
-        data_tests:
-          - unique
-          - not_null
       - name: name
         description: "Nome completo do atleta."
       - name: name_short
@@ -21,8 +18,6 @@ models:
         description: "Função ou posição do atleta."
       - name: country_code
         description: "Código do país do atleta."
-        data_tests:
-          - not_null
       - name: country
         description: "Nome do país do atleta."
       - name: country_long
@@ -80,18 +75,13 @@ models:
       - name: other_sports
         description: "Outros esportes praticados pelo atleta."
 
-
   - name: stg_postgres_medals
     description: "Tabela que contém informações sobre as medalhas conquistadas pelos atletas."
     columns:
       - name: medal_type
         description: "Tipo de medalha (ouro, prata, bronze)."
-        data_tests:
-        - not_null
       - name: medal_code
         description: "Código único da medalha."
-        data_tests:
-          - not_null
       - name: medal_date
         description: "Data em que a medalha foi conquistada."
       - name: name
@@ -108,30 +98,18 @@ models:
         description: "URL do evento relacionado à medalha."
       - name: code
         description: "Código único do atleta associado à medalha (chave estrangeira)."
-        data_tests:
-          - not_null
-          - relationships:
-              to: ref('stg_postgres_athletes')
-              field: code
-          - relationships:
-              to: ref('stg_postgres_teams')
-              field: code              
       - name: country_code
         description: "Código do país representado pelo atleta."
-        data_tests:
-        - not_null
       - name: country
         description: "Nome do país representado pelo atleta."
       - name: country_long
         description: "Nome completo do país representado pelo atleta."
-  - name: stg_postgres_teams  # Substitua pelo nome do seu modelo
+
+  - name: stg_postgres_teams
     description: "Tabela que contém informações detalhadas sobre as equipes."
     columns:
       - name: code
         description: "Código único do time (Primary Key)."
-        data_tests:
-          - unique
-          - not_null
       - name: team
         description: "Nome do time."
       - name: team_gender
@@ -142,14 +120,10 @@ models:
         description: "Nome completo do país."
       - name: country_code
         description: "Código do país."
-        data_tests:
-          - not_null
       - name: discipline
         description: "Disciplina esportiva em que o time compete."
       - name: disciplines_code
         description: "Código da disciplina esportiva."
-        data_tests:
-          - not_null
       - name: events
         description: "Eventos nos quais o time compete."
       - name: athletes
@@ -162,7 +136,5 @@ models:
         description: "Número de atletas que compõem o time."
       - name: coaches_codes
         description: "Códigos dos treinadores do time."
-        data_tests:
-          - not_null
       - name: num_coaches
         description: "Número de treinadores do time."

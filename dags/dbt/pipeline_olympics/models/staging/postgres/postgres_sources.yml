@@ -1,8 +1,8 @@
 version: 2
 
 sources:
-  - name: mydatabase_r7dp
-    database: mydatabase_r7dp
+  - name: mydatabase_r7dp_1c3c
+    database: mydatabase_r7dp_1c3c
     schema: raw
     tables:
       - name: sheets_athletes

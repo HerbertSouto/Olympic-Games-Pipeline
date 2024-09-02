@@ -1,25 +1,28 @@
-# Pipeline de Dados das Olimpíadas 2024: Airbyte, dbt, PostgreSQL, Airflow e Power BI (Em Construção)
+# Pipeline de Dados das Olimpíadas 2024: dbt, PostgreSQL, Airflow e Power BI (Em Construção)
 
 ## Visão Geral
 
-Este projeto cria um pipeline de dados para os Jogos Olímpicos de 2024. Utiliza o Airbyte para extrair dados de planilhas do Google Sheets, carrega essas informações em um banco de dados PostgreSQL hospedado no Render, e realiza a transformação dos dados utilizando dbt. O Apache Airflow será utilizado para orquestrar o pipeline, e o Power BI para visualização dos dados. O processo de transformação é dividido em camadas: raw, staging e mart, preparando os dados para análises detalhadas.
+Este projeto cria um pipeline de dados para os Jogos Olímpicos de 2024. Utiliza script python para extrair dados de planilhas do Google Sheets, carrega essas informações em um banco de dados PostgreSQL hospedado no Render, e realiza a transformação dos dados utilizando dbt. O Apache Airflow é utilizado para orquestrar o pipeline, e o Power BI para visualização dos dados. O processo de transformação é dividido em camadas: staging, intermediate e mart, preparando os dados para análises detalhadas.
 
 ## Arquitetura
 
 1. **Extração de Dados**:
-   - **Ferramenta**: Airbyte
-   - **Fonte**: Planilhas do Google Sheets contendo dados das Olimpíadas 2024
-   - **Destino**: PostgreSQL no Render
+**Objetivo**: Extrair dados de planilhas do Google Sheets e carregar esses dados em um banco de dados PostgreSQL.
+**Google Sheets API**: Acesso às planilhas.
+**Pandas**: Manipulação e conversão dos dados.
+**psycopg2**: Conexão e operação com o PostgreSQL.
+**Python**: Realiza a extração e carga dos dados. O script é configurado para buscar novas entradas e evitar duplicação.
+**Destino**: PostgreSQL no Render
 
 2. **Transformação de Dados**:
    - **Ferramenta**: dbt
    - **Camadas**:
-     - **Raw**: Camada inicial onde os dados são ingeridos diretamente.
-     - **Staging**: Camada intermediária para limpeza e transformação dos dados.
+     - **Staging**: Camada inicial onde os dados são ingeridos diretamente.
+     - **Intermediate**: Camada intermediária para limpeza e transformação dos dados.
      - **Mart**: Camada final organizada para relatórios e análises.
 
 3. **Orquestração**:
-   - **Ferramenta**: Apache Airflow
+   - **Ferramenta**: Apache Airflow-Astronomer
    - **Função**: Automatizar e gerenciar o fluxo do pipeline de dados.
 
 4. **Visualização de Dados**:
@@ -28,19 +31,39 @@ Este projeto cria um pipeline de dados para os Jogos Olímpicos de 2024. Utiliza
 
 ## Estrutura do Projeto
 
-- **/airbyte-config**: Arquivos de configuração do Airbyte para extração de dados.
 - **/dbt**: Projeto dbt contendo modelos e macros para as camadas raw, staging e mart.
-- **/sql**: Scripts SQL para a criação e gerenciamento do banco de dados PostgreSQL.
-- **/airflow**: Configuração e DAGs do Apache Airflow para orquestração do pipeline.
-- **/powerbi**: Arquivos e configurações para visualização dos dados no Power BI.
+- **/dags**: Configuração e DAGs do Apache Airflow para orquestração do pipeline.
 
-## Status Atual
+```mermaid
+flowchart TD
+    A[Google Sheets] -->|Dados| B[Script Python]
+    B -->|Dados Brutos| C[PostgreSQL Staging]
+    C -->|Dados Brutos| D[dbt Staging]
+    D -->|Dados Transformados| E[dbt Intermediate]
+    E -->|Dados Transformados| F[dbt Mart]
+    F -->|Dados Finalizados| G[Dashboard/Relatórios]
 
-### Concluído:
-- Configuração do Airbyte para extrair dados das planilhas do Google Sheets relacionadas às Olimpíadas 2024.
-- Configuração do banco de dados PostgreSQL no Render.
-- Desenvolvimento inicial dos modelos dbt para transformação dos dados.
-- Configuração das camadas de staging, intermediate e mart no dbt.
-### Próximos Passos:
-- Configurar o Apache Airflow para orquestrar o pipeline.
-- Desenvolver dashboards e relatórios no Power BI para visualização dos dados das Olimpíadas 2024.
+    subgraph Extração
+        A
+        B
+    end
+
+    subgraph Carga
+        C
+    end
+
+    subgraph Transformação
+        D
+        E
+        F
+    end
+
+    subgraph Orquestração
+        I[Apache Airflow + Astronomer]
+        I --> B
+        I --> D
+    end
+
+```
+**Visualização de Dados**: DataViz em Construção
+

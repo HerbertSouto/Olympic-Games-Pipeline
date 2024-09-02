@@ -3,7 +3,7 @@
 ) }}
 
 WITH source_medals as (
-SELECT * FROM {{source('mydatabase_r7dp', 'sheets_medals')}}
+SELECT * FROM {{source('mydatabase_r7dp_1c3c', 'sheets_medals')}}
 )
 
     SELECT
