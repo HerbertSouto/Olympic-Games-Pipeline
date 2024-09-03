@@ -1,4 +1,4 @@
-# Pipeline de Dados das Olimpíadas 2024: dbt, PostgreSQL, Airflow e Power BI (Em Construção)
+# Pipeline de Dados das Olimpíadas 2024: dbt, PostgreSQL, Airflow e Power BI
 
 ## Visão Geral
 
