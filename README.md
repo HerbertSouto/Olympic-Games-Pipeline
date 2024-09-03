@@ -36,7 +36,7 @@ Este projeto cria um pipeline de dados para os Jogos Olímpicos de 2024. Utiliza
 - **/dags**: Configuração e DAGs do Apache Airflow para orquestração do pipeline.
 - **/dags/config**: deve ficar as credencias do Google Cloud "credencials.json" - Ausente neste repositório por segurança.
 
-## Arquitetura
+## Diagrama
 
 ```mermaid
 flowchart TD
