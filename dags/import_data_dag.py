@@ -3,7 +3,7 @@ from airflow.operators.bash import BashOperator
 from airflow.operators.trigger_dagrun import TriggerDagRunOperator
 from airflow.utils.dates import days_ago
 from pathlib import Path
-
+from datetime import datetime, timedelta
 # Configurar o caminho do script usando pathlib
 default_extract_root_path = Path(__file__).parent / "extract.py"
 
@@ -11,7 +11,7 @@ default_extract_root_path = Path(__file__).parent / "extract.py"
 default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
-    'start_date': days_ago(1),
+    'start_date': datetime.now() - timedelta(minutes=10),  # Definido no passado
     'retries': 1,
 }
 
