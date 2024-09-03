@@ -31,8 +31,11 @@ Este projeto cria um pipeline de dados para os Jogos Olímpicos de 2024. Utiliza
 
 ## Estrutura do Projeto
 
-- **/dbt**: Projeto dbt contendo modelos e macros para as camadas raw, staging e mart.
+- **dags/dbt/pipeline_olympics**: Projeto dbt contendo modelos e macros para as camadas raw, staging e mart.
+- **dags/dbt/pipeline_olympics**: Necessário o arquivo "profiles.yml". - Ausente neste repositório por segurança.
 - **/dags**: Configuração e DAGs do Apache Airflow para orquestração do pipeline.
+- **/dags/config**: deve ficar as credencias do Google Cloud "credencials.json" - Ausente neste repositório por segurança.
+
 
 ```mermaid
 flowchart TD
