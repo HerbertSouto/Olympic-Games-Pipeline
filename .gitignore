@@ -178,3 +178,5 @@ pyrightconfig.json
 logs/
 
 credentials.json
+
+profiles.yml
