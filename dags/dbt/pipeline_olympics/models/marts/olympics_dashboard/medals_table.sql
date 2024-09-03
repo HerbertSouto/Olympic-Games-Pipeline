@@ -6,6 +6,7 @@
 WITH medals_by_country AS (
     SELECT 
         country_code,
+        country,
         COUNT(*) AS total_medals,
         SUM(CASE WHEN medal_type = 'Gold Medal' THEN 1 ELSE 0 END) AS gold_medals,
         SUM(CASE WHEN medal_type = 'Silver Medal' THEN 1 ELSE 0 END) AS silver_medals,
@@ -13,7 +14,7 @@ WITH medals_by_country AS (
     FROM 
         {{ ref('int_postgres_medals') }}
     GROUP BY 
-        country_code
+        country_code, country
 )
 
 SELECT *
