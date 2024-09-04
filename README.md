@@ -43,4 +43,5 @@ Este projeto implementa um pipeline de dados para os Jogos Olímpicos de 2024, i
 - **/dags/dbt/pipeline_olympics**: Arquivo de configuração (`profiles.yml`)necessário para o dbt conectar ao PostgreSQL (não incluído no repositório por razões de segurança).
 - **/dags**: Contém as DAGs do Apache Airflow para orquestração do pipeline de dados.
 - **/dags/config**: Diretório para armazenar as credenciais do Google Cloud (`credentials.json`) necessárias para acessar as planilhas do Google Sheets (não incluído no repositório por razões de segurança).
+ - **Dados Utilizados**: https://www.kaggle.com/datasets/piterfm/paris-2024-olympic-summer-games/
 
