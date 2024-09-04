@@ -33,40 +33,11 @@ Este projeto implementa um pipeline de dados para os Jogos Olímpicos de 2024, i
 ## Estrutura do Projeto
 
 - **/dags/dbt/pipeline_olympics**: Projeto dbt contendo modelos, macros e configurações para as camadas de transformação (`staging`, `intermediate`, `mart`).
-- **/dags/dbt/profiles.yml**: Arquivo de configuração necessário para o dbt conectar ao PostgreSQL (não incluído no repositório por razões de segurança).
+- **/dags/dbt/pipeline_olympics**: Arquivo de configuração (`profiles.yml`)necessário para o dbt conectar ao PostgreSQL (não incluído no repositório por razões de segurança).
 - **/dags**: Contém as DAGs do Apache Airflow para orquestração do pipeline de dados.
 - **/dags/config**: Diretório para armazenar as credenciais do Google Cloud (`credentials.json`) necessárias para acessar as planilhas do Google Sheets (não incluído no repositório por razões de segurança).
 
 ## Diagrama de Fluxo do Pipeline
 
-```mermaid
-flowchart TD
-    A[Google Sheets] -->|Extração de Dados| B[Script Python]
-    B -->|Carga de Dados Brutos| C[PostgreSQL - Staging]
-    C -->|Transformação Inicial| D[dbt - Staging]
-    D -->|Transformação Intermediária| E[dbt - Intermediate]
-    E -->|Transformação Final| F[dbt - Mart]
-    F -->|Dados Prontos| G[Dashboard/Relatórios - Power BI]
-
-    subgraph Extração
-        A
-        B
-    end
-
-    subgraph Carga
-        C
-    end
-
-    subgraph Transformação
-        D
-        E
-        F
-    end
-
-    subgraph Orquestração
-        I[Apache Airflow + Astronomer]
-        I --> B
-        I --> D
-    end
-```
+![Diagrama do Pipeline de Dados](include/Pipeline DBT-Airflow.png.png)
 
