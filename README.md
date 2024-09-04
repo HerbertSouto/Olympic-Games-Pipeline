@@ -39,5 +39,7 @@ Este projeto implementa um pipeline de dados para os Jogos Olímpicos de 2024, i
 
 ## Diagrama de Fluxo do Pipeline
 
-![Diagrama do Pipeline de Dados](include/Pipeline DBT-Airflow.png.png)
+<div align="center">
+  <img src="Pipeline.png" alt="CRUD" width="600" />
+</div>
 
