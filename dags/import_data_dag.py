@@ -4,14 +4,16 @@ from airflow.operators.trigger_dagrun import TriggerDagRunOperator
 from airflow.utils.dates import days_ago
 from pathlib import Path
 from datetime import datetime, timedelta
+
+
 # Configurar o caminho do script usando pathlib
 default_extract_root_path = Path(__file__).parent / "extract.py"
 
-# Definir o DAG
+# Definir DAG
 default_args = {
-    'owner': 'airflow',
+    'owner': 'HerbertSouto',
     'depends_on_past': False,
-    'start_date': datetime.now() - timedelta(minutes=10),  # Definido no passado
+    'start_date': datetime.now() - timedelta(minutes=10), 
     'retries': 1,
 }
 
@@ -23,19 +25,19 @@ dag = DAG(
     tags=['Extract','Google Sheets', 'Google API']
 )
 
-# Definir a tarefa BashOperator para importação de dados
+# Define a tarefa BashOperator para importação de dados
 import_data_task = BashOperator(
     task_id='import_data_task',
     bash_command=f'python {default_extract_root_path}',  # Caminho gerado dinamicamente
     dag=dag,
 )
 
-# Definir a tarefa TriggerDagRunOperator para rodar dbt
+# Define a tarefa para rodar o dbt
 trigger_dbt_task = TriggerDagRunOperator(
     task_id='trigger_dbt_task',
     trigger_dag_id='postgres-dbt-sql-transform',  # ID da DAG do dbt
     dag=dag,
 )
 
-# Definir a ordem das tarefas
+# Define a ordem das tarefas
 import_data_task >> trigger_dbt_task

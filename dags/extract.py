@@ -8,7 +8,6 @@ from psycopg2.extras import execute_values
 from pathlib import Path
 
 
-# Carregar variáveis de ambiente do .env
 load_dotenv()
 
 # Caminho para o arquivo credentials.json
@@ -18,7 +17,7 @@ json_extract_root_path = Path(__file__).parent / "config/credentials.json"
 if not os.path.exists(json_extract_root_path):
     raise FileNotFoundError(f"Arquivo credentials.json não encontrado no caminho: {json_extract_root_path}")
 
-# Configurar a conexão com o Google Sheets
+# Configura a conexão com o Google Sheets
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
 credentials = ServiceAccountCredentials.from_json_keyfile_name(json_extract_root_path, scope)
 client = gspread.authorize(credentials)
@@ -28,21 +27,21 @@ planilhas_e_tabelas = {
     'Olympics_teams': {
         'nome_aba': 'teams',
         'tabela': 'sheets_teams',
-        'coluna_id': 'code'  # Nome da coluna de ID para esta tabela
+        'coluna_id': 'code'  
     },
     'olympicgames_athletes': {
         'nome_aba': 'athletes',
         'tabela': 'sheets_athletes',
-        'coluna_id': 'code'  # Nome da coluna de ID para esta tabela
+        'coluna_id': 'code'  
     },
     'olympics_medals': {
         'nome_aba': 'medals',
         'tabela': 'sheets_medals',
-        'coluna_id': 'id'  # Nome da coluna de ID para esta tabela
+        'coluna_id': 'id' 
     }
 }
 
-# Configurar a conexão com o PostgreSQL usando variáveis de ambiente
+# Configurar a conexão com o Postgres
 DB_USER = os.getenv('USER_NAME')
 DB_PASS = os.getenv('PASSWORD')
 DB_HOST = os.getenv('HOST_NAME')
@@ -58,19 +57,17 @@ conn_params = {
     'port': DB_PORT
 }
 
-# Função para criar a conexão com o PostgreSQL
+# Função para criar a conexão
 def get_postgres_connection():
     return psycopg2.connect(**conn_params)
 
-# Inserir dados de cada planilha no PostgreSQL
+# Inserir dados de cada planilha no Postgres
 for planilha, info in planilhas_e_tabelas.items():
     print(f"Iniciando a importação da planilha '{planilha}' para a tabela '{info['tabela']}'...")
 
-    # Abrir a planilha e selecionar a aba específica
     sheet = client.open(planilha).worksheet(info['nome_aba'])
     data = sheet.get_all_records()
 
-    # Converter os dados para um DataFrame do pandas
     df = pd.DataFrame(data)
 
     # Inserir os dados no PostgreSQL no schema especificado, adicionando apenas novos registros

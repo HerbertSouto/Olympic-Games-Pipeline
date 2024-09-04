@@ -17,7 +17,7 @@ doc_md = """
 """
 
 default_args = {
-    "owner": "owshq",
+    "owner": "HerbertSouto",
     "retries": 3,
     "retry_delay": 1
 }
